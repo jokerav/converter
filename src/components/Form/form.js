@@ -1,29 +1,13 @@
-import InputCurrency from './input'
-import {Button, Form, Input, InputNumber, Select, Space, Tooltip, Typography} from 'antd';
+
+import { Form, InputNumber, Select} from 'antd';
 import React from "react";
-const { Option } = Select;
+
 const FormConverter = () => {
     const [form] = Form.useForm();
     const onFinish = () => {
         console.log(form.getFieldsValue());
     };
     const { Option } = Select;
-    const selectAfter = (
-        <Form.Item >
-        <Select
-            defaultValue="UAH"
-            style={{
-                width: 60,
-            }}
-        >
-            <Option value="UAH">₴</Option>
-            <Option value="USD">$</Option>
-            <Option value="EUR">€</Option>
-            <Option value="GBP">£</Option>
-            <Option value="CNY">¥</Option>
-        </Select>
-        </Form.Item>
-    );
     return (
         <Form
             form={form}
