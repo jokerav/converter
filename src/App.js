@@ -1,6 +1,7 @@
 import FormConverter from "./components/form";
 import './App.css';
 import 'antd/dist/antd.css';
+import CurrencyList from "./components/currencyList";
 import { useGetDataQuery} from './store/dataApi';
 
 function App() {
@@ -9,13 +10,15 @@ function App() {
   } = useGetDataQuery();
   const currency = ['USD', 'CNY', "EUR", 'GBP'];
   let currencyValue = [];
-  data.map(({cc,rate})=>{
+  data.forEach(({cc,rate})=>{
     if (currency.includes(cc)){
-      currencyValue.push({[cc]:rate})
+      currencyValue.push({
+        currency: cc, rate}          )
     }});
   console.log(currencyValue);
-  return  <FormConverter/>
-
+  return(  <>
+  <CurrencyList data={currencyValue}/>
+  <FormConverter/>
+</>)
 }
-
 export default App;
