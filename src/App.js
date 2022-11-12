@@ -1,4 +1,4 @@
-import Form from "./components/Form/form";
+import FormConverter from "./components/form";
 import './App.css';
 import 'antd/dist/antd.css';
 import { useGetDataQuery} from './store/dataApi';
@@ -14,9 +14,8 @@ function App() {
       currencyValue.push({[cc]:rate})
     }});
   console.log(currencyValue);
-  return (
-      <Form/>
-  );
+  return  <FormConverter/>
+
 }
 
 export default App;
