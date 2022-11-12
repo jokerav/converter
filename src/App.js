@@ -2,8 +2,6 @@ import Form from "./components/Form/form";
 import './App.css';
 import 'antd/dist/antd.css';
 import { useGetDataQuery} from './store/dataApi';
-//номера валлют 2,24,25,32
-
 
 function App() {
   const { data = []
@@ -16,8 +14,6 @@ function App() {
       currencyValue.push({[cc]:rate})
     }});
   console.log(currencyValue);
-
-
   return (
       <Form/>
   );
