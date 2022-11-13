@@ -21,6 +21,8 @@ const FormConverter = ({data}) => {
         form.setFieldValue('firstInput', value.toFixed(2))
     }
 
+    const onFinish=()=>{}
+
     const { Option } = Select;
     return (
         <Form

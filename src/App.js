@@ -1,10 +1,12 @@
+import { Typography } from 'antd';
 import FormConverter from "./components/form";
-import './App.css';
-import 'antd/dist/antd.css';
 import CurrencyList from "./components/currencyList";
 import { useGetDataQuery} from './store/dataApi';
+import 'antd/dist/antd.css';
+import './App.css';
 
 function App() {
+  const { Title } = Typography;
   const { data = []
     // , error, isLoading
   } = useGetDataQuery();
@@ -15,10 +17,12 @@ function App() {
       currencyValue.push({
         currency: cc, rate}          )
     }});
-  // console.log(currencyValue);
-  return(  <>
-  <CurrencyList data={currencyValue}/>
-  <FormConverter data={currencyValue}/>
-</>)
-}
+  return(
+      <>
+        <Title style={{textAlign:"center"}}>Поточний курс валют Національного банку України</Title>
+        <CurrencyList data={currencyValue}/>
+        <Title level={3}>Конвертер валют</Title>
+        <FormConverter data={currencyValue}/>
+      </>
+  )}
 export default App;
