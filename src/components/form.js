@@ -5,8 +5,8 @@ import React from "react";
 const FormConverter = ({data}) => {
     const [form] = Form.useForm();
     let currensyList={};
-    data.forEach(item=>
-        currensyList[item.currency]=item.rate
+    data.forEach(({currency,rate})=>
+        currensyList[currency]=rate
     )
     currensyList['UAH'] = 1;
     const setInput2=()=>{
@@ -20,16 +20,6 @@ const FormConverter = ({data}) => {
         form.setFieldValue('firstInput', value.toFixed(2))
     }
     const onFinish = () => {
-        // const {currency1, currency2, firstInput,secondInput} = form.getFieldsValue();
-        // console.log(currency1, currency2, firstInput,secondInput);
-        // console.log(form);
-        // let currensyList={};
-        // data.forEach(item=>
-        //     currensyList[item.currency]=item.rate
-        // )
-        // currensyList['UAH'] = 1;
-        // const value2 = firstInput*currensyList[currency2]
-        // form.setFieldValue('secondInput', value2)
     };
     const { Option } = Select;
     return (
