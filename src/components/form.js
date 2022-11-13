@@ -2,10 +2,34 @@
 import { Form, InputNumber, Select} from 'antd';
 import React from "react";
 
-const FormConverter = () => {
+const FormConverter = ({data}) => {
     const [form] = Form.useForm();
+    let currensyList={};
+    data.forEach(item=>
+        currensyList[item.currency]=item.rate
+    )
+    currensyList['UAH'] = 1;
+    const setInput2=()=>{
+        const {currency1, currency2, firstInput} = form.getFieldsValue();
+        const value = firstInput*currensyList[currency1]  / currensyList[currency2];
+        form.setFieldValue('secondInput', value.toFixed(2))
+    }
+    const setInput1=()=>{
+        const {currency1, currency2,secondInput} = form.getFieldsValue( );
+        const value = secondInput*currensyList[currency2]  / currensyList[currency1];
+        form.setFieldValue('firstInput', value.toFixed(2))
+    }
     const onFinish = () => {
-        console.log(form.getFieldsValue());
+        // const {currency1, currency2, firstInput,secondInput} = form.getFieldsValue();
+        // console.log(currency1, currency2, firstInput,secondInput);
+        // console.log(form);
+        // let currensyList={};
+        // data.forEach(item=>
+        //     currensyList[item.currency]=item.rate
+        // )
+        // currensyList['UAH'] = 1;
+        // const value2 = firstInput*currensyList[currency2]
+        // form.setFieldValue('secondInput', value2)
     };
     const { Option } = Select;
     return (
@@ -20,14 +44,17 @@ const FormConverter = () => {
                 span: 16,
             }}
         >
-
-            <Form.Item name="firstInput" initialValue={100} >
+            <Form.Item name="firstInput" initialValue={0}>
                 <InputNumber
-                    onChange={()=>onFinish()}
+                    min={0}
+                    onChange={()=>setInput2()}
                     addonAfter={
-                        <Form.Item name="currency1" initialValue='UAH' style={{height: 6}}>
+                        <Form.Item
+                            name="currency1"
+                            initialValue='UAH'
+                            style={{height: 6}}>
                             <Select
-                                onChange={()=>(onFinish())}
+                                onChange={()=>setInput2()}
                                 style={{
                                     width: 60,
                                 }}
@@ -39,28 +66,33 @@ const FormConverter = () => {
                                 <Option value="CNY">¥</Option>
                             </Select>
                         </Form.Item>}
-
                 />
             </Form.Item>
-            <Form.Item name="secondInput" initialValue={100}>
+            <Form.Item
+                name="secondInput"
+                initialValue={0}
+                >
                 <InputNumber
-                    onChange={()=>onFinish()}
+                    min={0}
+                    onChange={()=>setInput1()}
                     addonAfter={
-                        <Form.Item name="currency2" initialValue='EUR' style={{height: 6}}>
-                        <Select
-                             onChange={()=>(onFinish())}
+                        <Form.Item
+                            name="currency2"
+                            initialValue='USD'
+                            style={{height: 6}}>
+                            <Select
+                                onChange={()=>setInput1()}
                             style={{
                                 width: 60,
                             }}
-                        >
+                            >
                             <Option value="UAH">₴</Option>
                             <Option value="USD">$</Option>
                             <Option value="EUR">€</Option>
                             <Option value="GBP">£</Option>
                             <Option value="CNY">¥</Option>
                         </Select>
-                    </Form.Item>}
-
+                        </Form.Item>}
                 />
             </Form.Item>
         </Form>

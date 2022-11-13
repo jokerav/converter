@@ -15,10 +15,10 @@ function App() {
       currencyValue.push({
         currency: cc, rate}          )
     }});
-  console.log(currencyValue);
+  // console.log(currencyValue);
   return(  <>
   <CurrencyList data={currencyValue}/>
-  <FormConverter/>
+  <FormConverter data={currencyValue}/>
 </>)
 }
 export default App;
