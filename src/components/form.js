@@ -1,14 +1,15 @@
-
 import { Form, InputNumber, Select} from 'antd';
 import React from "react";
 
 const FormConverter = ({data}) => {
     const [form] = Form.useForm();
-    let currensyList={};
+
+    let currensyList = {};
     data.forEach(({currency,rate})=>
         currensyList[currency]=rate
     )
     currensyList['UAH'] = 1;
+
     const setInput2=()=>{
         const {currency1, currency2, firstInput} = form.getFieldsValue();
         const value = firstInput*currensyList[currency1]  / currensyList[currency2];
@@ -19,8 +20,7 @@ const FormConverter = ({data}) => {
         const value = secondInput*currensyList[currency2]  / currensyList[currency1];
         form.setFieldValue('firstInput', value.toFixed(2))
     }
-    const onFinish = () => {
-    };
+
     const { Option } = Select;
     return (
         <Form
@@ -32,9 +32,10 @@ const FormConverter = ({data}) => {
             }}
             wrapperCol={{
                 span: 16,
-            }}
-        >
-            <Form.Item name="firstInput" initialValue={0}>
+            }}>
+            <Form.Item
+                name="firstInput"
+                initialValue={0}>
                 <InputNumber
                     min={0}
                     onChange={()=>setInput2()}
@@ -47,21 +48,20 @@ const FormConverter = ({data}) => {
                                 onChange={()=>setInput2()}
                                 style={{
                                     width: 60,
-                                }}
-                            >
+                                }}>
                                 <Option value="UAH">₴</Option>
                                 <Option value="USD">$</Option>
                                 <Option value="EUR">€</Option>
                                 <Option value="GBP">£</Option>
                                 <Option value="CNY">¥</Option>
                             </Select>
-                        </Form.Item>}
+                        </Form.Item>
+                    }
                 />
             </Form.Item>
             <Form.Item
                 name="secondInput"
-                initialValue={0}
-                >
+                initialValue={0}>
                 <InputNumber
                     min={0}
                     onChange={()=>setInput1()}
@@ -72,17 +72,17 @@ const FormConverter = ({data}) => {
                             style={{height: 6}}>
                             <Select
                                 onChange={()=>setInput1()}
-                            style={{
+                                style={{
                                 width: 60,
-                            }}
-                            >
+                                }}>
                             <Option value="UAH">₴</Option>
                             <Option value="USD">$</Option>
                             <Option value="EUR">€</Option>
                             <Option value="GBP">£</Option>
                             <Option value="CNY">¥</Option>
-                        </Select>
-                        </Form.Item>}
+                            </Select>
+                        </Form.Item>
+                    }
                 />
             </Form.Item>
         </Form>
